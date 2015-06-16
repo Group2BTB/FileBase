@@ -10,5 +10,11 @@ public class MAIN {
 		/*Process pro = new Process();
 		//call display content application
 		pro.showManu();*/
+		
+		
+		Process pro = new Process();
+		pro.callMethod();
+		
+		pro.display();
 	}
 }

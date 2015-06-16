@@ -1,10 +1,13 @@
 package file.base;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+
 public interface IOperationFile {
 	
-	Article addArticle(Article art);
-	void deleteArticle(Article art, int id);
-	void updateArticle(Article art, int id);
-	
+	void addArticle(Collection<Article> arrList,Article art);
+	void deleteArticle(ArrayList<Article> arrList, int id);
+	void updateArticle(ArrayList<Article> arrList, int id);
 	
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Process extends OperationFile{
 	
-	private List<Article> arrList;
+	private ArrayList<Article> arrList;
 	private Article art;
 	
 	public Process() {

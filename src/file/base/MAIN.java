@@ -1,7 +1,5 @@
 package file.base;
 
-import java.util.ArrayList;
-
 public class MAIN {
 	public static void main(String[] args) {
 		/**
@@ -13,8 +11,6 @@ public class MAIN {
 		
 		
 		Process pro = new Process();
-		pro.callMethod();
-		
-		pro.display();
+		pro.showManu();
 	}
 }

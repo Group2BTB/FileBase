@@ -123,26 +123,24 @@ public class OperationFile implements IOperationFile {
 		// check condition if number less 1 and over 3, it is not valid (input
 		// again)
 		try {
-				System.out
-						.print("What you want to update: [1.Title|2.Author|3.Content]: ");
-				String option = scan.next();
-				if (isInteger(option) == true) {
-					int choice = Integer.parseInt(option);
-					if (choice == 1) {
-						System.out.print("Enter Title: ");
-						arrList.get(index).setTitle(scan.next());
-					}
-					else if(choice == 2){
-						System.out.print("Enter Author: ");
-						arrList.get(index).setAuthor(scan.next());
-					}
-					else if(choice == 3){
-						System.out.print("Enter Content: ");
-						arrList.get(index).setContent(scan.next());
-					}else{
-						System.out.println("Invalid Option!");
-					}
+			System.out
+					.print("What you want to update: [1.Title|2.Author|3.Content]: ");
+			String option = scan.next();
+			if (isInteger(option) == true) {
+				int choice = Integer.parseInt(option);
+				if (choice == 1) {
+					System.out.print("Enter Title: ");
+					arrList.get(index).setTitle(scan.next());
+				} else if (choice == 2) {
+					System.out.print("Enter Author: ");
+					arrList.get(index).setAuthor(scan.next());
+				} else if (choice == 3) {
+					System.out.print("Enter Content: ");
+					arrList.get(index).setContent(scan.next());
+				} else {
+					System.out.println("Invalid Option!");
 				}
+			}
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// TODO: handle exception
@@ -180,12 +178,12 @@ public class OperationFile implements IOperationFile {
 	}
 
 	public String autoSetDate() {
-		Date today = Calendar.getInstance().getTime();// Use to get time from
-														// system.
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");/*
-																 * Use to change
-																 * date format.
-																 */
+		/*Use to get time from system.*/
+		Date today = Calendar.getInstance().getTime(); 
+		
+		 /*Use to change date format.*/
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		
 		return sdf.format(today);
 	}
 
@@ -193,8 +191,8 @@ public class OperationFile implements IOperationFile {
 	public void readArticel(Collection<Article> List, int id) {
 		// TODO Auto-generated method stub
 		ArrayList<Article> arrList = (ArrayList<Article>) List;
-		int index = Collections.binarySearch(arrList, new Article(id,
-				null, null, null, null), new Comparator<Article>() {
+		int index = Collections.binarySearch(arrList, new Article(id, null,
+				null, null, null), new Comparator<Article>() {
 			@Override
 			public int compare(Article art1, Article art2) {
 				// TODO Auto-generated method stub
@@ -204,20 +202,17 @@ public class OperationFile implements IOperationFile {
 		try {
 			if (arrList.get(index).getId() == id) {
 				System.out.println("ID     : " + arrList.get(index).getId());
-				System.out.println("Title  : "
-						+ arrList.get(index).getTitle());
+				System.out.println("Title  : " + arrList.get(index).getTitle());
 				System.out.println("Content: "
 						+ arrList.get(index).getContent());
-				System.out.println("Author : "
-						+ arrList.get(index).getAuthor());
 				System.out
-						.println("Date   : " + arrList.get(index).getDate());
+						.println("Author : " + arrList.get(index).getAuthor());
+				System.out.println("Date   : " + arrList.get(index).getDate());
 			}
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.out.println("Id you input is invalid!");
 		}
-
 
 	}
 

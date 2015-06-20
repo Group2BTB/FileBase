@@ -1,5 +1,7 @@
 package file.base;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,7 +14,7 @@ import java.util.Scanner;
 public class OperationFile implements IOperationFile {
 
 	private static int increment = 0;
-
+	
 	@Override
 	public void addArticle(Collection<Article> arrList) {
 		// TODO Auto-generated method stub
@@ -214,6 +216,14 @@ public class OperationFile implements IOperationFile {
 			System.out.println("Id you input is invalid!");
 		}
 
+	}
+	public static void writeLogFile(String action, String desc, String status) throws IOException{
+		Date today = Calendar.getInstance().getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+		String ass=sdf.format(today) +" "+ action +" "+ desc +" "+ status + "\n";
+		FileWriter fw = new FileWriter("logfile.log", true);
+		fw.append(ass);
+		fw.close();
 	}
 
 }

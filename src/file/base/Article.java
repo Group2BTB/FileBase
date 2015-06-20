@@ -1,6 +1,8 @@
 package file.base;
 
-public class Article {
+import java.io.Serializable;
+
+public class Article implements Serializable {
 	/*
 	 *@param id is use to store id value of Article
 	 *@param title 

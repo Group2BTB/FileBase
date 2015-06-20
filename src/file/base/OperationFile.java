@@ -220,7 +220,7 @@ public class OperationFile implements IOperationFile {
 	public static void writeLogFile(String action, String desc, String status) throws IOException{
 		Date today = Calendar.getInstance().getTime();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-		String ass=sdf.format(today) +" "+ action +" "+ desc +" "+ status + "\n";
+		String ass="\n" + sdf.format(today) +"\t\t"+ action +"\t\t"+ desc +"\t\t\t\t"+ status;
 		FileWriter fw = new FileWriter("logfile.log", true);
 		fw.append(ass);
 		fw.close();

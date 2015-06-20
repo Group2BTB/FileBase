@@ -18,7 +18,7 @@ public class Process extends OperationFile{
 		// TODO Auto-generated constructor stub
 		arrList = new ArrayList<Article>();
 		for(int i=1; i<=1000000;i++){
-			arrList.add(new Article(i, "title", "content", "author", "2015-01-01"));
+			arrList.add(new Article(i, "title"+i, "content", "author"+i, "2015-01-01"));
 		}
 		//art = new Article();
 	}
@@ -29,6 +29,8 @@ public class Process extends OperationFile{
 		Process pro = new Process();
 		Validation val = new Validation();
 		Pagination pagin = new Pagination();
+		
+		Filter filter = new Filter();
 		// display head content
 		ui.head();
 		// display list article
@@ -87,7 +89,7 @@ public class Process extends OperationFile{
 					case "S":
 						System.out.println("s");
 						actSearch = 1;
-						//indexSearch = pro.searchArticle(this.arrList);
+						indexSearch = filter.searchArticle(this.arrList);
 						pagin.showPage(this.arrList, indexSearch, 1, "M", ui);
 						break;
 					// Add Article
@@ -166,8 +168,8 @@ public class Process extends OperationFile{
 					break;
 				case "S":
 					actSearch = 1;
-					//pagin.showPage(this.arrList,
-					//pro.searchArticle(this.arrList), 1, "M", ui);
+					pagin.showPage(this.arrList,
+					filter.searchArticle(this.arrList), 1, "M", ui);
 					break;
 				case "A":
 					pro.addArticle(arrList);

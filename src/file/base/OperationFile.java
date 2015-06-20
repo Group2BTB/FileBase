@@ -1,7 +1,15 @@
 package file.base;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,9 +20,11 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class OperationFile implements IOperationFile {
+	
+	static File file = new File("D:\\file.txt");
 
 	private static int increment = 0;
-	
+
 	@Override
 	public void addArticle(Collection<Article> arrList) {
 		// TODO Auto-generated method stub
@@ -225,5 +235,34 @@ public class OperationFile implements IOperationFile {
 		fw.append(ass);
 		fw.close();
 	}
-
+	
+	
+	public static void writeFile(ArrayList arr){
+		
+		try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));) {
+			oos.writeObject(arr);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
+	
+	public static void readFile(ArrayList arr){
+		
+		try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));) {
+			
+			arr = (ArrayList<Article>)ois.readObject();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch(ClassNotFoundException e){
+			
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

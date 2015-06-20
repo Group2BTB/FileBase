@@ -17,6 +17,9 @@ public class Process extends OperationFile{
 	public Process() {
 		// TODO Auto-generated constructor stub
 		arrList = new ArrayList<Article>();
+		for(int i=1; i<=1000000;i++){
+			arrList.add(new Article(i, "title", "content", "author", "2015-01-01"));
+		}
 		//art = new Article();
 	}
 	

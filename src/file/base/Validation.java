@@ -83,11 +83,5 @@ public String[] checkNull(String str){
 			}				
 		
 		return value;			
-	}
-	public String[] spliteStr(String str){			
-		str = str.replace("  ", " ");
-		String[] arrStr = str.split(" ");
-		return arrStr;
-	}
-	
+	}	
 }

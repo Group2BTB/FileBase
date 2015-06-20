@@ -13,12 +13,12 @@ public class Process extends OperationFile{
 	private ArrayList<Article> arrList;
 	ArrayList<Integer> indexSearch = new ArrayList<Integer>();
 	public static byte actSearch = 0;
-	
+	static int j = 0;
 	public Process() {
 		// TODO Auto-generated constructor stub
 		arrList = new ArrayList<Article>();
 		for(int i=1; i<=1000000;i++){
-			arrList.add(new Article(i, "title"+i, "content", "author"+i, "2015-01-01"));
+			arrList.add(new Article(j++, "title", "content", "author", "2015-01-01"));
 		}
 		//art = new Article();
 	}
@@ -87,7 +87,6 @@ public class Process extends OperationFile{
 						break;
 					// Search
 					case "S":
-						System.out.println("s");
 						actSearch = 1;
 						indexSearch = filter.searchArticle(this.arrList);
 						pagin.showPage(this.arrList, indexSearch, 1, "M", ui);
@@ -99,28 +98,15 @@ public class Process extends OperationFile{
 						break;
 					// Edit article
 					case "E":
-						System.out.print("Please Input ID: ");
-						String option = scan.next();
-						if (isInteger(option) == true) {
-							pro.updateArticle(this.arrList,
-									Integer.parseInt(option));
-						} else {
-							System.out.println("ID is not valid!!!");
-						}
+						updateArticle(arrList, Integer.parseInt(strAct[1]));
 						break;
 					// Delete Article
 					case "D":
-						System.out.print("Please Input ID: ");
-						String choice = scan.next();
-						if (isInteger(choice) == true) {
-							pro.deleteArticle(this.arrList, Integer.parseInt(choice));
-						} else {
-							System.out.println("ID is not valid!!!");
-						}
-						
+						deleteArticle(arrList, Integer.parseInt(strAct[1]));
 						break;
 					// Delete all
 					case "DL":
+						deleteAll(arrList);
 						break;
 					// Read by Article
 					case "RD":
@@ -176,26 +162,13 @@ public class Process extends OperationFile{
 					pagin.showPage(this.arrList, 1, "M", ui);
 					break;
 				case "E":
-					System.out.print("Enter id to Edit: ");
-					String option = scan.next();
-					if (isInteger(option) == true) {
-						pro.updateArticle(this.arrList,
-								Integer.parseInt(option));
-					} else {
-						System.out.println("ID is not valid!!!");
-					}
-
+					updateArticle(arrList, Integer.parseInt(strAct[1]));
 					break;
 				case "D":
-					System.out.print("Please Input ID: ");
-					String choice = scan.next();
-					if (isInteger(choice) == true) {
-						pro.deleteArticle(this.arrList, Integer.parseInt(choice));
-					} else {
-						System.out.println("ID is not valid!!!");
-					}
+					deleteArticle(arrList, Integer.parseInt(strAct[1]));
 					break;
 				case "DL":
+					deleteAll(arrList);
 					break;
 				case "RD":
 					readArticel(arrList, Integer.parseInt(strAct[1]));
@@ -209,5 +182,4 @@ public class Process extends OperationFile{
 			}
 		}
 	}
-	
 }

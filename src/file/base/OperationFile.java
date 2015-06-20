@@ -19,6 +19,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Scanner;
 
+
 public class OperationFile implements IOperationFile {
 	
 	static File file = new File("D:\\file.txt");
@@ -123,6 +124,22 @@ public class OperationFile implements IOperationFile {
 		}
 
 	}
+	
+	@Override
+	public void deleteAll(Collection<Article> arrList){
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Are you sure to delete this Article? (y/n): ");
+		String option = scan.next();
+		if (option.matches("y")) {
+			arrList.clear();// call method clear() of ArrayList
+			System.out.println("All of the article content was clear!");
+		} else if (option.matches("n")) {
+			System.out.println("Delete was canceled!");
+		}else{
+			System.out.println("Invalid keyword! Please try again!");
+		}
+		
+	}
 
 	@Override
 	public void updateArticle(Collection<Article> list, int id){
@@ -150,12 +167,15 @@ public class OperationFile implements IOperationFile {
 				if (choice == 1) {
 					System.out.print("Enter Title: ");
 					arrList.get(index).setTitle(scan.next());
+					System.out.println("Saved!...");
 				} else if (choice == 2) {
 					System.out.print("Enter Author: ");
 					arrList.get(index).setAuthor(scan.next());
+					System.out.println("Saved!...");
 				} else if (choice == 3) {
 					System.out.print("Enter Content: ");
 					arrList.get(index).setContent(scan.next());
+					System.out.println("Saved!...");
 				} else {
 					System.out.println("Invalid Option!");
 				}
@@ -249,7 +269,6 @@ public class OperationFile implements IOperationFile {
 		
 	}
 	
-	
 	public static void writeFile(ArrayList arr){
 		
 		try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));) {
@@ -261,7 +280,6 @@ public class OperationFile implements IOperationFile {
 	}
 	
 	public static void readFile(ArrayList arr){
-		
 		OperationFile.arr = arr;
 		try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));) {
 			

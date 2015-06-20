@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Filter {
 	public ArrayList<Integer> searchArticle(ArrayList<Article> arrList) {
+
 		System.out.print("Input keyword you want to search: ");
 		Iterator<Article> itr = arrList.iterator();// Create object iterator from ArrayList "arrList"
 		Scanner scan = new Scanner(System.in);

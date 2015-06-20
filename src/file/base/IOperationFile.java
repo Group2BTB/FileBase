@@ -7,4 +7,5 @@ public interface IOperationFile {
 	void deleteArticle(Collection<Article> arrList, int id);
 	void updateArticle(Collection<Article> arrList, int id);
 	void readArticel(Collection<Article> arrList, int id);
+	void deleteAll(Collection<Article> arrList);
 }

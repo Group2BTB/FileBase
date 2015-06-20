@@ -42,9 +42,7 @@ public String[] checkNull(String str){
 				}
 			}
 						
-			if(subStr.equalsIgnoreCase("G")|| subStr.equalsIgnoreCase("R")){
-				
-				
+			if(subStr.equalsIgnoreCase("G")|| subStr.equalsIgnoreCase("R")){							
 				if(subStr2.matches(".*(\\D).*"))
 					return value;
 				else{				

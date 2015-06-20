@@ -25,6 +25,8 @@ public class OperationFile implements IOperationFile {
 
 	private static int increment = 0;
 
+	private static ArrayList arr;
+
 	@Override
 	public void addArticle(Collection<Article> arrList) {
 		// TODO Auto-generated method stub
@@ -60,10 +62,12 @@ public class OperationFile implements IOperationFile {
 			if (choice == 1) {
 				arrList.add(art);// add object art of Article to ArrayList
 				System.out.println("Article saved...");
+				writeLogFile("Add ", "Add ID="+increment+" ", "Sucessfuly");
 
 			} else if (choice == 2) {
 				arrList.add(art);// add object art of Article to ArrayList
 				System.out.println("Article saved...");
+				writeLogFile("Add ", "Add ID="+increment+" ", "Sucessfuly");
 				addArticle(arrList);// Call function addArticle again
 
 			} else if (choice == 3) {
@@ -105,20 +109,23 @@ public class OperationFile implements IOperationFile {
 					if (arrList.get(index).getId() == id) {
 						arrList.remove(id - 1);
 						System.out.println("Delete successfully!");
+						writeLogFile("Delete ", "Delete ID="+id+" ", "Sucessfuly");
 					}
 				} else if (option.matches("n")) {
 					System.out.println("Delete was canceled!");
+					writeLogFile("Delete ", "Delete ID="+id+" ", "Not");
 				}
 
 			} catch (ArrayIndexOutOfBoundsException e) {
 				System.out.println("Invalid ID!");
+				writeLogFile("Delete ", "Delete ID="+id+" "+e.getMessage(), "Error");
 			}
 		}
 
 	}
 
 	@Override
-	public void updateArticle(Collection<Article> list, int id) {
+	public void updateArticle(Collection<Article> list, int id){
 		// TODO Auto-generated method stub
 		ArrayList<Article> arrList = (ArrayList<Article>) list;
 		Scanner scan = new Scanner(System.in);
@@ -153,10 +160,12 @@ public class OperationFile implements IOperationFile {
 					System.out.println("Invalid Option!");
 				}
 			}
+			writeLogFile("Update ", "Update ID="+id+" ", "Sucessfuly");
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// TODO: handle exception
 			System.out.println("\n*** Input ID is not found!!!***\n");
+			writeLogFile("Update ", "Update ID="+id+" "+e.getMessage(), "Error");
 		}
 	}
 
@@ -227,13 +236,17 @@ public class OperationFile implements IOperationFile {
 		}
 
 	}
-	public static void writeLogFile(String action, String desc, String status) throws IOException{
-		Date today = Calendar.getInstance().getTime();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-		String ass="\n" + sdf.format(today) +"\t\t"+ action +"\t\t"+ desc +"\t\t\t\t"+ status;
-		FileWriter fw = new FileWriter("logfile.log", true);
-		fw.append(ass);
-		fw.close();
+	public void writeLogFile(String action, String desc, String status){
+		try(FileWriter fw=new FileWriter("logfile.log", true)){
+			Date today = Calendar.getInstance().getTime();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+			String ass="\n" + sdf.format(today) +"\t\t"+ action +"\t\t"+ desc +"\t\t\t\t"+ status;			
+			fw.append(ass);			
+			
+		}catch(IOException e){
+			
+		}
+		
 	}
 	
 	
@@ -249,6 +262,7 @@ public class OperationFile implements IOperationFile {
 	
 	public static void readFile(ArrayList arr){
 		
+		OperationFile.arr = arr;
 		try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));) {
 			
 			arr = (ArrayList<Article>)ois.readObject();

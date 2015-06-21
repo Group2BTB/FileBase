@@ -270,11 +270,9 @@ public class OperationFile implements IOperationFile {
 		}catch(IOException e){
 			
 		}
-		
 	}
 	
 	public static void writeFile(ArrayList<Article> arr){
-		
 		try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));) {
 			checkTempFile(arr);			
 			oos.writeObject(arr);

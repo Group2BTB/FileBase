@@ -26,7 +26,7 @@ public class OperationFile implements IOperationFile {
 
 	private static int increment = 0;
 
-	private static ArrayList<Article> arr;  //change from ArrayList to ArrayList<Article>
+	private static ArrayList<Article> arr; 
 
 	@Override
 	public void addArticle(Collection<Article> arrList) {
@@ -282,8 +282,7 @@ public class OperationFile implements IOperationFile {
 	public static void readFile(ArrayList<Article> arr){
 		OperationFile.arr = arr;
 		try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));) {
-			
-			arr = (ArrayList<Article>)ois.readObject();
+			arr.addAll((ArrayList<Article>)ois.readObject());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

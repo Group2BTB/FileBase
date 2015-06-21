@@ -288,6 +288,10 @@ public class OperationFile implements IOperationFile {
 	public static void readFile(ArrayList<Article> arr){
 		OperationFile.arr = arr;
 		try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));) {
+			
+			if(arr.size()>0){
+				arr.clear();
+			}
 			arr.addAll((ArrayList<Article>)ois.readObject());
 			
 			if(TempFile.exists()){				

@@ -26,7 +26,7 @@ public class OperationFile implements IOperationFile {
 
 	private static int increment = 0;
 
-	private static ArrayList arr;
+	private static ArrayList<Article> arr;  //change from ArrayList to ArrayList<Article>
 
 	@Override
 	public void addArticle(Collection<Article> arrList) {
@@ -269,7 +269,7 @@ public class OperationFile implements IOperationFile {
 		
 	}
 	
-	public static void writeFile(ArrayList arr){
+	public static void writeFile(ArrayList<Article> arr){
 		
 		try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));) {
 			oos.writeObject(arr);
@@ -279,7 +279,7 @@ public class OperationFile implements IOperationFile {
 		}		
 	}
 	
-	public static void readFile(ArrayList arr){
+	public static void readFile(ArrayList<Article> arr){
 		OperationFile.arr = arr;
 		try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));) {
 			

@@ -297,8 +297,8 @@ public class OperationFile implements IOperationFile {
 			if(TempFile.exists()){				
 				
 				checkTempFile(arr);
-				writeFile(arr);
 				TempFile.delete();
+				writeFile(arr);
 				return;
 			}
 		} catch (FileNotFoundException e) {

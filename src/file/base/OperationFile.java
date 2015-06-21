@@ -385,7 +385,7 @@ public class OperationFile implements IOperationFile {
 		int index;
 		String title; String content; String author; String date;		
 		
-		if(new File(TempFile.getAbsolutePath()).exists() == false)
+		if(TempFile.exists() == false)
 			return;		
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(TempFile));) {

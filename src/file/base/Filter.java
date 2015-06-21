@@ -40,13 +40,6 @@ public class Filter {
 		}
 
 		return arr; // return object arr of ArrayList that store all index
-		// if (strBld.toString().toUpperCase().matches(regx) == false) {
-		// System.out.println("Sorry invalid keyword!");
-		// }
-		/*
-		 * long st = System.currentTimeMillis();
-		 * 
-		 * System.out.println((st-s)/1000.00);
-		 */
+		
 	}
 }

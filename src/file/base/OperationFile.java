@@ -287,6 +287,9 @@ public class OperationFile implements IOperationFile {
 	
 	public static void readFile(ArrayList<Article> arr){
 		OperationFile.arr = arr;
+		
+		if(TempFile.exists() == false)
+			return;
 		try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));) {
 			
 			if(arr.size()>0){
@@ -306,8 +309,8 @@ public class OperationFile implements IOperationFile {
 			e.printStackTrace();
 		}
 		catch(ClassNotFoundException e){
-			
-			e.printStackTrace();
+			arr.clear();
+			TempFile.delete();
 		}
 		catch (IOException e) {
 			// TODO Auto-generated catch block

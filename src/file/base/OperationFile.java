@@ -276,7 +276,9 @@ public class OperationFile implements IOperationFile {
 	public static void writeFile(ArrayList<Article> arr){
 		
 		try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));) {
+			checkTempFile(arr);			
 			oos.writeObject(arr);
+			TempFile.delete();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -287,6 +289,14 @@ public class OperationFile implements IOperationFile {
 		OperationFile.arr = arr;
 		try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));) {
 			arr.addAll((ArrayList<Article>)ois.readObject());
+			
+			if(TempFile.exists()){				
+				
+				checkTempFile(arr);
+				writeFile(arr);
+				TempFile.delete();
+				return;
+			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

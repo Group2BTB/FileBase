@@ -6,8 +6,8 @@ public class Validation {
 		String[] value = { "Error", "" };
 		String subStr;
 		String subStr2;
-		String[] keys = { "F", "P", "N", "L", "S", "A", "E", "D", "DL", "H",
-				"X", "HM" };
+		String[] keys = { "F", "P", "N", "L", "S", "A", "E", "D","CA", "H", "X",
+				"HM" };
 
 		if (str == null)
 			return value;
@@ -31,7 +31,8 @@ public class Validation {
 
 					if (subStr4.equalsIgnoreCase(""))
 						return value;
-					else if (subStr4.matches(".*(\\D).*"))
+					else if (subStr4.matches(".*"
+							+ str.trim().equalsIgnoreCase(str) + "*"))
 						return value;
 					else {
 
@@ -40,44 +41,16 @@ public class Validation {
 						return value;
 					}
 				}
+				
 			}
-			
-			/*if (subStr.equalsIgnoreCase("S")) {
-				if (subStr2.matches(".*(\\D).*"))
-					return value;
-				else {
-					value[0] = subStr;
-					value[1] = subStr2;
-					return value;
-				}
-			}*/
 
-			if (subStr.equalsIgnoreCase("G") || subStr.equalsIgnoreCase("R")) {
-				if (subStr2.matches(".*(\\D).*"))
+			if (subStr.equalsIgnoreCase("G") || subStr.equalsIgnoreCase("R")
+					|| subStr.equalsIgnoreCase("E")
+					|| subStr.equalsIgnoreCase("D")) {
+
+				if (subStr2.matches(".*"+str.trim().equalsIgnoreCase(str)+"*")) {
 					return value;
-				else {
-					value[0] = subStr;
-					value[1] = subStr2;
-					return value;
-				}
-			}
-			if (subStr.equalsIgnoreCase("D")) {
-				if (subStr2.equalsIgnoreCase(""))
-					return value;
-				else if (subStr2.matches(".*(\\D).*"))
-					return value;
-				else {
-					value[0] = subStr;
-					value[1] = subStr2;
-					return value;
-				}
-			}
-			if (subStr.equalsIgnoreCase("E")) {
-				if (subStr2.equalsIgnoreCase(""))
-					return value;
-				else if (subStr2.matches(".*(\\D).*"))
-					return value;
-				else {
+				} else {
 					value[0] = subStr;
 					value[1] = subStr2;
 					return value;
@@ -111,5 +84,11 @@ public class Validation {
 		}
 
 		return value;
+	}
+
+	public String[] spliteStr(String str) {
+		str = str.replace("  ", " ");
+		String[] arrStr = str.split(" ");
+		return arrStr;
 	}
 }

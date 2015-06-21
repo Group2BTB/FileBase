@@ -28,9 +28,11 @@ public class OperationFile implements IOperationFile {
 	static File file = new File("D:\\file.txt");
 	static File TempFile = new File("D:\\TempData"); //this is location of temp file
 	
-	private static int increment = 0;
+	public static int increment = 0;
 
 	private static ArrayList<Article> arr; 
+	
+
 
 	@Override
 	public void addArticle(Collection<Article> arrList) {

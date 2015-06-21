@@ -1,25 +1,37 @@
 package file.base;
 
 import java.util.ArrayList;
-import java.util.List;
+//import java.util.List;
 import java.util.Scanner;
 
 /*
- * Class Process use to store all methods 
+ * 
  */
 
 public class Process extends OperationFile{
 	
-	private ArrayList<Article> arrList;
+	private ArrayList<Article> arrList = new ArrayList<Article>();
 	ArrayList<Integer> indexSearch = new ArrayList<Integer>();
 	public static byte actSearch = 0;
-	static int j = 0;
 	public Process() {
 		// TODO Auto-generated constructor stub
-		arrList = new ArrayList<Article>();
+		//arrList = new ArrayList<Article>();
 		for(int i=1; i<=1000000;i++){
-			arrList.add(new Article(j++, "title", "content", "author", "2015-01-01"));
+			this.arrList.add(new Article(++increment, "title"+i, "content", "author", "2015-01-01"));
 		}
+		/*System.out.println("Adding content ...");
+		long s = System.currentTimeMillis();
+		for (int i = 1; i <= 1000000; i++) {
+			Article atr = new Article();
+			atr.setId(++increment);
+			atr.setTitle("Title " +i );
+			atr.setContent("content " +i);
+			atr.setAuthor("author " +i	);
+			atr.setDate(autoSetDate());
+			this.arrList.add(atr);
+		}
+		long st = System.currentTimeMillis(); 
+		System.out.println((st - s) / 1000.00);*/
 		//art = new Article();
 	}
 	
@@ -34,7 +46,7 @@ public class Process extends OperationFile{
 		// display head content
 		ui.head();
 		// display list article
-		pagin.showPage(pro.arrList, 1, "HM", ui);
+		pagin.showPage(this.arrList, 1, "HM", ui);
 		while (true) {
 			// display menu
 			ui.menu();
@@ -105,7 +117,7 @@ public class Process extends OperationFile{
 						deleteArticle(arrList, Integer.parseInt(strAct[1]));
 						break;
 					// Delete all
-					case "DL":
+					case "CA":
 						deleteAll(arrList);
 						break;
 					// Read by Article
@@ -167,7 +179,7 @@ public class Process extends OperationFile{
 				case "D":
 					deleteArticle(arrList, Integer.parseInt(strAct[1]));
 					break;
-				case "DL":
+				case "CA":
 					deleteAll(arrList);
 					break;
 				case "RD":

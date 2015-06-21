@@ -175,7 +175,7 @@ public class UI {
 	 * Descript the members of group who make this application 
 	 */
 	public void head(){ 
-		System.out.println("+======================>} Korean Software HTD Center {<=======================+");
+		System.out.println("+======================>} Korean Software HRD Center {<=======================+");
 		System.out.println("|                                                                             |");
 		System.out.println("|                             Article Management                              |");
 		System.out.println("|                                                                             |");
@@ -197,7 +197,7 @@ public class UI {
 		System.out.println("+=================================>} MENU {<==================================+");
 		System.out.println("|                               HM)Home X)Exit                                |");
 		System.out.println("|     F)First | P)Previous | N)Next | L)Last | G)Goto | R)Set Row  X)Exit     |");
-		System.out.println("|   S)Search| RD)Read | A)Add | E)Edit | D)Delete | DL)Delete-All | H)Help    |");
+		System.out.println("|   S)Search| RD)Read | A)Add | E)Edit | D)Delete | CA)CLEAR-All | H)Help     |");
 		System.out.println("|_____________________________________________________________________________|");
 		System.out.print("\n*Choose: ");
 	}
@@ -220,11 +220,11 @@ public class UI {
 		System.out.println("| 5.  G)Goto : Goto the page. (*Choose: G 12)                                 |");
 		System.out.println("| 6.  R)Set Row : Set row to dispay in page. (*Choose: R 20)                  |");
 		System.out.println("| 7.  RD)Read : Read by ID. (*Choose: RD 8)                                   |");
-		System.out.println("| 8.  S)Search : Filter by Title, Contain or Author (*Choose: S AJAX)         |");
+		System.out.println("| 8.  S)Search : Filter by Title, Contain or Author (*Choose: S)              |");
 		System.out.println("| 9.  A)Add : Add new Article. (*Choose: I)                                   |");
 		System.out.println("| 10. E)Edit : Edit Article by ID. (*Choose: E 10)                            |");
 		System.out.println("| 11. D)Delete : Delete Article by ID. (*Choose: D 10)                        |");
-		System.out.println("| 12. DL)Delete-All : Delete All Article. (*Choose: DL)                       |");
+		System.out.println("| 12. CA)CLEAR-All : CLEAR All Article. (*Choose: CA)                         |");
 		System.out.println("| 13. H)Help : Guiline application. (*Choose: H)                              |");
 		System.out.println("| 14. X)Exit : Exit application. (*Choose: X)                                 |");
 		System.out.println("| 15. HM)Home : Home page. (*Choose: HM)                                      |");

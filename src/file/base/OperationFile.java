@@ -134,7 +134,7 @@ public class OperationFile implements IOperationFile {
 	@Override
 	public void deleteAll(Collection<Article> arrList){
 		Scanner scan = new Scanner(System.in);
-		System.out.print("Are you sure to delete this Article? (y/n): ");
+		System.out.print("Are you sure to delete all Article? [y/n]: ");
 		String option = scan.next();
 		if (option.matches("y")) {
 			arrList.clear();// call method clear() of ArrayList

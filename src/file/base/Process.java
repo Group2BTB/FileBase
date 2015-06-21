@@ -110,11 +110,23 @@ public class Process extends OperationFile{
 						break;
 					// Edit article
 					case "E":
-						updateArticle(arrList, Integer.parseInt(strAct[1]));
+						try{
+							updateArticle(arrList, Integer.parseInt(strAct[1]));
+						}catch (NumberFormatException e) {
+							// TODO: handle exception
+							System.out.println("Invalid Keyword! Please input keyword 'E' or 'e' and id you want to Edit!");
+						}
+						
 						break;
 					// Delete Article
 					case "D":
-						deleteArticle(arrList, Integer.parseInt(strAct[1]));
+						try{
+							deleteArticle(arrList, Integer.parseInt(strAct[1]));
+						}catch (NumberFormatException e) {
+							// TODO: handle exception
+							System.out.println("Invalid Keyword! Please input keyword 'D' or 'd' and id you want to Delete!");
+						}
+						
 						break;
 					// Delete all
 					case "CA":

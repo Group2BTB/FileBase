@@ -2,11 +2,14 @@ package file.base;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -23,7 +26,8 @@ import java.util.Scanner;
 public class OperationFile implements IOperationFile {
 	
 	static File file = new File("D:\\file.txt");
-
+	static File TempFile = new File("D:\\TempData"); //this is location of temp file
+	
 	private static int increment = 0;
 
 	private static ArrayList<Article> arr; 
@@ -293,6 +297,142 @@ public class OperationFile implements IOperationFile {
 		}
 		catch (IOException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/*@param num is a number represent type of value. 1 for ID, 2 for title, 3 for Content, 4 for Author, 5 for Date
+	 * @value is a value to concatenate    
+	 * */
+	static String concatenate(int num, String value){
+				
+		if(value.matches(".*" + "@@@" + ".*")){
+			System.out.println("Invalid content! @@@ will be invisible or empty.");
+			value = value.replaceAll("@@@", "");
+		}
+		String str = "@@@"+num+value+"@@@"+(num+1);  
+		return str;
+	}
+	
+	public static void writeTempAdd(int id, String title, String content, String author, String date){
+				
+		String add = "add ";
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(TempFile,true));) {
+			
+			bw.write(add + concatenate(1, id + "") + concatenate(2, title) + concatenate(3, content) + concatenate(4, author) + concatenate(5, date));			
+			bw.newLine();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}		
+	}
+	
+	public static void writeTempUpdate(int index, String title, String content, String author){
+		
+		String update = "upd ";
+		
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(TempFile,true));) {
+			
+			bw.write(update + concatenate(1, index + "") + concatenate(2, title) + concatenate(3, content) + concatenate(4, author));			
+			bw.newLine();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}		
+	}
+	
+	public static void writeTempDelete(int index){
+		
+		String delete = "del ";
+		
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(TempFile,true));) {
+			
+			bw.write(delete + concatenate(1,index + ""));
+			bw.newLine();
+					
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+	public static void checkTempFile(ArrayList<Article> lst){
+		
+		String str;
+		int start;
+		int stop;
+		
+		String opera;  //operation, add, del, or upd
+		int index;
+		String title; String content; String author; String date;		
+		
+		if(new File(TempFile.getAbsolutePath()).exists() == false)
+			return;		
+		
+		try(BufferedReader br = new BufferedReader(new FileReader(TempFile));) {
+			
+			while((str = br.readLine())!=null){				
+				opera = str.substring(0,3);
+				
+				if(opera.equals("add")){
+					 start = str.lastIndexOf("@@@1")+4;
+					 stop = str.indexOf("@@@2");
+					 index = Integer.parseInt(str.substring(start, stop));
+					 start = str.lastIndexOf("@@@2")+4;
+					 stop = str.indexOf("@@@3");
+					 title = str.substring(start, stop).trim();
+					 
+					 start = str.lastIndexOf("@@@3")+4;
+					 stop = str.indexOf("@@@4");
+					 content = str.substring(start, stop).trim();
+					 
+					 start = str.lastIndexOf("@@@4")+4;
+					 stop = str.indexOf("@@@5");
+					 author = str.substring(start, stop).trim();
+					 
+					 start = str.lastIndexOf("@@@5")+4;
+					 stop = str.indexOf("@@@6");
+					 date = str.substring(start, stop).trim();
+					 
+					 lst.add(new Article(index, title, content, author, date));				
+				}
+				else if(opera.equals("upd")){
+					
+					 start = str.lastIndexOf("@@@1")+4;
+					 stop = str.indexOf("@@@2");
+					 index = Integer.parseInt(str.substring(start, stop));
+					 
+					 start = str.lastIndexOf("@@@2")+4;
+					 stop = str.indexOf("@@@3");
+					 title = str.substring(start, stop).trim();
+					 
+					 start = str.lastIndexOf("@@@3")+4;
+					 stop = str.indexOf("@@@4");
+					 content = str.substring(start, stop).trim();
+					 
+					 start = str.lastIndexOf("@@@4")+4;
+					 stop = str.indexOf("@@@5");
+					 author = str.substring(start, stop).trim();
+					 
+					 lst.get(index).setTitle(title);
+					 lst.get(index).setContent(content);
+					 lst.get(index).setAuthor(author);
+					 
+				}
+				else if(opera.equals("del")){
+					
+					 start = str.lastIndexOf("@@@1")+4;
+					 stop = str.indexOf("@@@2");
+					 index = Integer.parseInt(str.substring(start, stop));
+					 
+					 lst.remove(index);				
+				}
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}

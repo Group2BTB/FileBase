@@ -28,8 +28,9 @@ import java.util.Scanner;
 
 public class OperationFile implements IOperationFile {
 	
-	static File file = new File("D:\\file.txt");
-	static File TempFile = new File("D:\\TempData"); //this is location of temp file
+	static File file = new File("file.txt");
+	static File TempFile = new File("TempData.tmp"); //this is location of temp file
+	static File backFile;
 	
 
 
@@ -383,14 +384,15 @@ public class OperationFile implements IOperationFile {
 	public static void backupFile(String fileName){
 		
 		File sFile = new File(file.getAbsolutePath());
-		File dFile = new File(fileName);
+		File backfFile = new File(fileName);
 		
 		if(sFile.exists())
-			if(dFile.exists())
+			if(backfFile.exists())
 				System.out.println("Destination File alrady exists!");
 			else
 				try {
-					Files.copy(sFile.toPath(), dFile.toPath());
+					Files.copy(sFile.toPath(), backfFile.toPath());
+					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

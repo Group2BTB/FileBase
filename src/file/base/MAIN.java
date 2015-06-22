@@ -17,9 +17,9 @@ public class MAIN {
 //		str = str.replaceAll("\\n", "\\\\n"); //\n
 //		System.out.println(str);
 //		System.exit(0);
-		File file  =new File("D:\\file.txt");
-		System.out.println(Files.size(file.toPath()));
-		OperationFile.backupFile("newfile");
+//		File file  =new File("D:\\file.txt");
+//		System.out.println(Files.size(file.toPath()));
+		OperationFile.backupFile("newfile.txt");
 		
 		
 		System.exit(0);;

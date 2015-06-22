@@ -6,7 +6,7 @@ public class Validation {
 		String[] value = { "Error", "" };
 		String subStr;
 		String subStr2;
-		String[] keys = { "F", "P", "N", "L", "S", "A", "E", "D","CA", "H", "X",
+		String[] keys = { "Re","B","F", "P", "N", "L", "S", "A", "E", "D","CA", "H", "X",
 				"HM", "SO" };
 
 		if (str == null)

@@ -137,6 +137,14 @@ public class Process extends OperationFile{
 					case "RD":
 						readArticel(arrList, Integer.parseInt(strAct[1]));
 						break;
+					// Restore Article
+					case "Re":
+						
+						break;
+					// Back Article
+					case "B":
+						
+						break;
 					// Error Syntax
 					case "SO": 
 						callSort();
@@ -203,6 +211,14 @@ public class Process extends OperationFile{
 					break;
 				case "RD":
 					readArticel(arrList, Integer.parseInt(strAct[1]));
+					break;
+				// Restore Article
+				case "Re":
+					
+					break;
+				// Back Article
+				case "B":
+					
 					break;
 				case "SO": 
 					callSort();

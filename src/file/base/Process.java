@@ -15,7 +15,7 @@ public class Process extends OperationFile{
 	public static byte actSearch = 0;
 	public Process() {
 		// TODO Auto-generated constructor stub
-		arrList = new ArrayList<Article>();
+		//arrList = 
 
 		//for(int i=1; i<=1000000;i++){
 		//	arrList.add(new Article(i, "title", "content", "author", "2015-01-01"));
@@ -24,11 +24,15 @@ public class Process extends OperationFile{
 		OperationFile ope =new OperationFile();
 		//ope.writeFile(arrList);
 		ope.readFile(arrList);
-		ope.checkTempFile(arrList);				
+		//ope.checkTempFile(arrList);				
 
 	}
 	public  Integer Increase(){
-		return arrList.get(arrList.size()-1).getId();
+		if(arrList.size()==0)
+			return 0;
+		else
+			return arrList.get(arrList.size()-1).getId();
+		
 	}
 	public void showManu() {
 		Scanner scan = new Scanner(System.in);
@@ -86,7 +90,7 @@ public class Process extends OperationFile{
 					case "X":
 						
 						new OperationFile().writeFile(arrList);
-						new OperationFile().clearFile();
+						//new OperationFile().clearFile();
 						ui.thanks();
 						System.exit(1);
 						break;
@@ -168,7 +172,7 @@ public class Process extends OperationFile{
 					break;
 				case "X":
 					new OperationFile().writeFile(arrList);
-					new OperationFile().clearFile();
+					//new OperationFile().clearFile();
 					ui.thanks();
 					System.exit(1);
 					break;

@@ -26,13 +26,13 @@ import java.util.Scanner;
 
 public class OperationFile implements IOperationFile {
 	
-	static File file = new File("file.txt");
+	static File file = new File("D:\\file.txt");
 	static File TempFile = new File("D:\\TempData"); //this is location of temp file
 	
 
 
 
-	private static ArrayList<Article> arr; 
+	//private static ArrayList<Article> arr; 
 
 	private static int increment = new Process().Increase();
 	
@@ -297,9 +297,9 @@ public class OperationFile implements IOperationFile {
 	
 
 	public static void readFile(ArrayList<Article> arr){
-		OperationFile.arr = arr;
+		//OperationFile.arr = arr;
 		
-		if(TempFile.exists() == false)
+		if(file.exists() == false)
 			return;
 		try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));) {
 			
@@ -307,6 +307,7 @@ public class OperationFile implements IOperationFile {
 				arr.clear();
 			}
 			arr.addAll((ArrayList<Article>)ois.readObject());
+			System.out.println(arr.size());
 			
 			if(TempFile.exists()){				
 				
@@ -465,8 +466,8 @@ public class OperationFile implements IOperationFile {
 					 lst.remove(index);				
 				}
 			}
-			writeFile(lst);
-			clearFile();
+		//	writeFile(lst);
+		//	clearFile();
 			
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -61,8 +61,7 @@ public class OperationFile implements IOperationFile {
 		String option;
 		int choice = 0;
 		do {
-			System.out
-					.print("What do you want to save: [1.Save|2.Save-New|3.Cancel]: ");
+			System.out.print("What do you want to save: [1.Save|2.Save-New|3.Cancel]: ");
 			/* Ask user to choose the option that they want */
 			option = scan.next();
 			option = option + scan.nextLine();
@@ -75,6 +74,7 @@ public class OperationFile implements IOperationFile {
 				arrList.add(art);// add object art of Article to ArrayList
 				System.out.println("Article saved...");
 				writeLogFile("Add ", "Add ID="+art.getId()+" ", "Sucessfuly");
+				//String str = art.getContent().replaceAll("\\n","\\\\n");
 				writeTempAdd(art.getId(), art.getTitle(), art.getContent(), art.getAuthor(), art.getDate());
 			} else if (choice == 2) {
 				arrList.add(art);// add object art of Article to ArrayList
@@ -141,17 +141,23 @@ public class OperationFile implements IOperationFile {
 	}
 	
 	@Override
-	public void deleteAll(Collection<Article> arrList){
+	public Boolean deleteAll(Collection<Article> arrList){
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Are you sure to delete all Article? [y/n]: ");
 		String option = scan.next();
 		if (option.matches("y")) {
 			arrList.clear();// call method clear() of ArrayList
+			TempFile.delete();
+			file.delete();
 			System.out.println("All of the article content was clear!");
+			return true;			
 		} else if (option.matches("n")) {
 			System.out.println("Delete was canceled!");
+			return false;
 		}else{
+			
 			System.out.println("Invalid keyword! Please try again!");
+			return false;
 		}
 		
 	}
@@ -218,6 +224,7 @@ public class OperationFile implements IOperationFile {
 			if (imsi == null)
 				imsi = "";
 			sb.append(imsi);
+			sb.append("\n");
 		}
 		return sb.toString();
 	}

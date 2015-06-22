@@ -131,7 +131,8 @@ public class Process extends OperationFile{
 						break;
 					// Delete all
 					case "CA":
-						deleteAll(arrList);
+						if(deleteAll(arrList))
+							arrList = new ArrayList<Article>();
 						break;
 					// Read by Article
 					case "RD":

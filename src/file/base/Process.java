@@ -1,5 +1,6 @@
 package file.base;
 
+import java.io.File;
 import java.util.ArrayList;
 //import java.util.List;
 import java.util.Scanner;
@@ -13,6 +14,7 @@ public class Process extends OperationFile{
 	private ArrayList<Article> arrList = new ArrayList<Article>();
 	ArrayList<Integer> indexSearch = new ArrayList<Integer>();
 	public static byte actSearch = 0;
+	File file = new File("file_backup.bac");
 	public Process() {
 		// TODO Auto-generated constructor stub
 		//arrList = 
@@ -139,11 +141,11 @@ public class Process extends OperationFile{
 						break;
 					// Restore Article
 					case "Re":
-						
+						callRestore();
 						break;
 					// Back Article
 					case "B":
-						
+						OperationFile.backupFile(file.toString());
 						break;
 					// Error Syntax
 					case "SO": 
@@ -214,11 +216,11 @@ public class Process extends OperationFile{
 					break;
 				// Restore Article
 				case "Re":
-					
+					callRestore();
 					break;
 				// Back Article
 				case "B":
-					
+					OperationFile.backupFile(file.toString());
 					break;
 				case "SO": 
 					callSort();
@@ -246,6 +248,17 @@ public class Process extends OperationFile{
 			this.arrList = filter.sortArticleByAuthor(arrList);
 		}else{
 			System.out.println("Invalid Keyword!");
+		}
+	}
+	
+	public void callRestore(){
+		System.out.println("Are you sure want to restore data? [y/n]: ");
+		Scanner scan = new Scanner(System.in);
+		String choice  = scan.next();
+		if(choice.equalsIgnoreCase("y")){
+			OperationFile.restoreFile(file.toString());
+		}else{
+			System.out.println("Restore file was cancel!");
 		}
 	}
 }

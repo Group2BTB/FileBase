@@ -89,7 +89,7 @@ public class Process extends OperationFile{
 					// Exit
 					case "X":
 						
-						new OperationFile().writeFile(arrList);
+						OperationFile.writeFile(arrList);
 						//new OperationFile().clearFile();
 						ui.thanks();
 						System.exit(1);

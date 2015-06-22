@@ -196,7 +196,7 @@ public class UI {
 	public void menu(){
 		System.out.println("+=================================>} MENU {<==================================+");
 		System.out.println("|                               HM)Home X)Exit                                |");
-		System.out.println("|     F)First | P)Previous | N)Next | L)Last | G)Goto | R)Set Row             |");
+		System.out.println("|     F)First | P)Previous | N)Next | L)Last | G)Goto | R)Set Row | SO)Sort   |");
 		System.out.println("|   S)Search| RD)Read | A)Add | E)Edit | D)Delete | CA)CLEAR-All | H)Help     |");
 		System.out.println("|_____________________________________________________________________________|");
 		System.out.print("\n*Choose: ");
@@ -228,6 +228,7 @@ public class UI {
 		System.out.println("| 13. H)Help : Guiline application. (*Choose: H)                              |");
 		System.out.println("| 14. X)Exit : Exit application. (*Choose: X)                                 |");
 		System.out.println("| 15. HM)Home : Home page. (*Choose: HM)                                      |");
+		System.out.println("| 16. SO)Sort : Sort Article by Id, Title, Author. (*Choose: SO)              |");
 		System.out.println("|_____________________________________________________________________________|");
 	}
 	/**

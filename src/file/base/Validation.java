@@ -7,7 +7,7 @@ public class Validation {
 		String subStr;
 		String subStr2;
 		String[] keys = { "F", "P", "N", "L", "S", "A", "E", "D","CA", "H", "X",
-				"HM" };
+				"HM", "SO" };
 
 		if (str == null)
 			return value;

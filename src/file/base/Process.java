@@ -37,7 +37,6 @@ public class Process extends OperationFile{
 	public void showManu() {
 		Scanner scan = new Scanner(System.in);
 		UI ui = new UI();
-		Process pro = new Process();
 		Validation val = new Validation();
 		Pagination pagin = new Pagination();
 		
@@ -139,6 +138,10 @@ public class Process extends OperationFile{
 						readArticel(arrList, Integer.parseInt(strAct[1]));
 						break;
 					// Error Syntax
+					case "SO": 
+						callSort();
+						pagin.showPage(arrList, 1, "HM", ui);
+						break;
 					case "Error":
 						System.out.println("Syntax Error!");
 						break;
@@ -186,7 +189,7 @@ public class Process extends OperationFile{
 					filter.searchArticle(this.arrList), 1, "M", ui);
 					break;
 				case "A":
-					pro.addArticle(arrList);
+					addArticle(arrList);
 					pagin.showPage(this.arrList, 1, "M", ui);
 					break;
 				case "E":
@@ -201,6 +204,10 @@ public class Process extends OperationFile{
 				case "RD":
 					readArticel(arrList, Integer.parseInt(strAct[1]));
 					break;
+				case "SO": 
+					callSort();
+					pagin.showPage(arrList, 1, "HM", ui);
+					break;
 				case "Error":
 					System.out.println("Syntax Error!");
 					break;
@@ -208,6 +215,21 @@ public class Process extends OperationFile{
 					continue;
 				}
 			}
+		}
+	}
+	public void callSort(){
+		Filter filter = new Filter();
+		System.out.print("Sort [Id|Title|Author]: ");
+		Scanner scan = new Scanner(System.in);
+		String option = scan.next();
+		if(option.equalsIgnoreCase("id")){
+			this.arrList = filter.sortArticleById(arrList);
+		}else if(option.equalsIgnoreCase("title")){
+			this.arrList = filter.sortArticleByTitle(arrList);
+		}else if(option.equalsIgnoreCase("author")){
+			this.arrList = filter.sortArticleByAuthor(arrList);
+		}else{
+			System.out.println("Invalid Keyword!");
 		}
 	}
 }

@@ -413,7 +413,14 @@ public class OperationFile implements IOperationFile {
 		
 		backFile = new File(Name);
 		if(backFile.exists()){
-			file = new File(Name);
+			file.delete();
+			//file = new File(Name);
+			try {
+				Files.copy(backFile.toPath(), file.toPath());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
 		}
 	}
 	

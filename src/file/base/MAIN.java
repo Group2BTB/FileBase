@@ -19,12 +19,13 @@ public class MAIN {
 //		System.exit(0);
 //		File file  =new File("D:\\file.txt");
 //		System.out.println(Files.size(file.toPath()));
+		
 		OperationFile.backupFile("newfile.txt");
 		OperationFile.restoreFile("newfile.txt");
 		System.out.println(OperationFile.file.toString());
-		
-		
-		System.exit(0);;
+//		
+//		
+//		System.exit(0);;
 		Process pro = new Process();		
 		pro.showManu();
 	}

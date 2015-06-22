@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -334,7 +336,10 @@ public class OperationFile implements IOperationFile {
 				return;
 			}
 					
-		} catch (FileNotFoundException e) {
+		}catch(EOFException ex){
+			
+		}
+		catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -374,6 +379,26 @@ public class OperationFile implements IOperationFile {
 			e.printStackTrace();
 		}		
 	}
+	
+	public static void backupFile(String fileName){
+		
+		File sFile = new File(file.getAbsolutePath());
+		File dFile = new File(fileName);
+		
+		if(sFile.exists())
+			if(dFile.exists())
+				System.out.println("Destination File alrady exists!");
+			else
+				try {
+					Files.copy(sFile.toPath(), dFile.toPath());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		else
+			System.out.println("Soure file does not exist!");	
+	}
+	
 	
 	public static void writeTempUpdate(int index, String title, String content, String author){
 		

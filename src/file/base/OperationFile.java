@@ -388,7 +388,15 @@ public class OperationFile implements IOperationFile {
 		
 		if(sFile.exists())
 			if(backfFile.exists())
-				System.out.println("Destination File alrady exists!");
+				{
+					backfFile.delete();
+					try {
+						Files.copy(sFile.toPath(), backfFile.toPath());
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			else
 				try {
 					Files.copy(sFile.toPath(), backfFile.toPath());
@@ -399,6 +407,14 @@ public class OperationFile implements IOperationFile {
 				}
 		else
 			System.out.println("Soure file does not exist!");	
+	}
+	
+	public static void restoreFile(String Name){
+		
+		backFile = new File(Name);
+		if(backFile.exists()){
+			file = new File(Name);
+		}
 	}
 	
 	

@@ -20,6 +20,8 @@ public class MAIN {
 //		File file  =new File("D:\\file.txt");
 //		System.out.println(Files.size(file.toPath()));
 		OperationFile.backupFile("newfile.txt");
+		OperationFile.restoreFile("newfile.txt");
+		System.out.println(OperationFile.file.toString());
 		
 		
 		System.exit(0);;

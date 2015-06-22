@@ -15,26 +15,21 @@ public class Process extends OperationFile{
 	public static byte actSearch = 0;
 	public Process() {
 		// TODO Auto-generated constructor stub
-		//arrList = new ArrayList<Article>();
-		for(int i=1; i<=1000000;i++){
-			this.arrList.add(new Article(++increment, "title"+i, "content", "author", "2015-01-01"));
-		}
-		/*System.out.println("Adding content ...");
-		long s = System.currentTimeMillis();
-		for (int i = 1; i <= 1000000; i++) {
-			Article atr = new Article();
-			atr.setId(++increment);
-			atr.setTitle("Title " +i );
-			atr.setContent("content " +i);
-			atr.setAuthor("author " +i	);
-			atr.setDate(autoSetDate());
-			this.arrList.add(atr);
-		}
-		long st = System.currentTimeMillis(); 
-		System.out.println((st - s) / 1000.00);*/
-		//art = new Article();
+		arrList = new ArrayList<Article>();
+
+		//for(int i=1; i<=1000000;i++){
+		//	arrList.add(new Article(i, "title", "content", "author", "2015-01-01"));
+		//}
+		
+		OperationFile ope =new OperationFile();
+		//ope.writeFile(arrList);
+		ope.readFile(arrList);
+		ope.checkTempFile(arrList);				
+
 	}
-	
+	public  Integer Increase(){
+		return arrList.get(arrList.size()-1).getId();
+	}
 	public void showManu() {
 		Scanner scan = new Scanner(System.in);
 		UI ui = new UI();
@@ -54,7 +49,6 @@ public class Process extends OperationFile{
 			part = part + scan.nextLine();
 			String[] strAct = val.checkNull(part);
 			part = strAct[0];
-
 			if (actSearch == 0) {
 				switch (part) {
 					// main page
@@ -90,6 +84,9 @@ public class Process extends OperationFile{
 						break;
 					// Exit
 					case "X":
+						
+						new OperationFile().writeFile(arrList);
+						new OperationFile().clearFile();
 						ui.thanks();
 						System.exit(1);
 						break;
@@ -105,7 +102,7 @@ public class Process extends OperationFile{
 						break;
 					// Add Article
 					case "A":
-						pro.addArticle(arrList);
+						addArticle(arrList);
 						pagin.showPage(this.arrList, 1, "M", ui);
 						break;
 					// Edit article
@@ -170,6 +167,8 @@ public class Process extends OperationFile{
 							Integer.parseInt(strAct[1]), "R", ui);
 					break;
 				case "X":
+					new OperationFile().writeFile(arrList);
+					new OperationFile().clearFile();
 					ui.thanks();
 					System.exit(1);
 					break;

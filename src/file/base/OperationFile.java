@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,12 +26,16 @@ import java.util.Scanner;
 
 public class OperationFile implements IOperationFile {
 	
-	static File file = new File("D:\\file.txt");
+	static File file = new File("file.txt");
 	static File TempFile = new File("D:\\TempData"); //this is location of temp file
 	
-	public static int increment = 0;
+
+
 
 	private static ArrayList<Article> arr; 
+
+	private static int increment = new Process().Increase();
+	
 	
 
 
@@ -69,14 +74,14 @@ public class OperationFile implements IOperationFile {
 			if (choice == 1) {
 				arrList.add(art);// add object art of Article to ArrayList
 				System.out.println("Article saved...");
-				writeLogFile("Add ", "Add ID="+increment+" ", "Sucessfuly");
-
+				writeLogFile("Add ", "Add ID="+art.getId()+" ", "Sucessfuly");
+				writeTempAdd(art.getId(), art.getTitle(), art.getContent(), art.getAuthor(), art.getDate());
 			} else if (choice == 2) {
 				arrList.add(art);// add object art of Article to ArrayList
-				System.out.println("Article saved...");
-				writeLogFile("Add ", "Add ID="+increment+" ", "Sucessfuly");
+				System.out.println("Article saved...");				
 				addArticle(arrList);// Call function addArticle again
-
+				writeLogFile("Add ", "Add ID="+art.getId()+" ", "Sucessfuly");
+				writeTempAdd(art.getId(), art.getTitle(), art.getContent(), art.getAuthor(), art.getDate());
 			} else if (choice == 3) {
 				System.out.println("Record cancelled!");
 				return;
@@ -104,19 +109,23 @@ public class OperationFile implements IOperationFile {
 		});
 		if (arrList.get(index).getId() == id) {
 			Scanner scan = new Scanner(System.in);
-			System.out.println(arrList.get(index).getId() + " "
-					+ arrList.get(index).getTitle() + " "
-					+ arrList.get(index).getContent() + " "
-					+ arrList.get(index).getAuthor() + " "
-					+ arrList.get(index).getDate());
+			System.out.println("ID     : " + arrList.get(index).getId());
+			System.out.println("Title  : " + arrList.get(index).getTitle());
+			System.out.println("Content: "
+					+ arrList.get(index).getContent());
+			System.out
+					.println("Author : " + arrList.get(index).getAuthor());
+			System.out.println("Date   : " + arrList.get(index).getDate());
+			
 			System.out.print("Are you sure to delete this Article? [y/n]: ");
 			String option = scan.nextLine();
 			try {
 				if (option.matches("y")) {
 					if (arrList.get(index).getId() == id) {
-						arrList.remove(id - 1);
+						arrList.remove(index);
 						System.out.println("Delete successfully!");
 						writeLogFile("Delete ", "Delete ID="+id+" ", "Sucessfuly");
+						writeTempDelete(index);
 					}
 				} else if (option.matches("n")) {
 					System.out.println("Delete was canceled!");
@@ -187,7 +196,7 @@ public class OperationFile implements IOperationFile {
 				}
 			}
 			writeLogFile("Update ", "Update ID="+id+" ", "Sucessfuly");
-
+			writeTempUpdate(index, arrList.get(index).getTitle(), arrList.get(index).getContent(), arrList.get(index).getAuthor());
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// TODO: handle exception
 			System.out.println("\n*** Input ID is not found!!!***\n");
@@ -274,7 +283,8 @@ public class OperationFile implements IOperationFile {
 		}
 	}
 	
-	public static void writeFile(ArrayList<Article> arr){
+
+	public static void writeFile(ArrayList<Article> arr){	
 		try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));) {
 			checkTempFile(arr);			
 			oos.writeObject(arr);
@@ -285,6 +295,7 @@ public class OperationFile implements IOperationFile {
 		}		
 	}
 	
+
 	public static void readFile(ArrayList<Article> arr){
 		OperationFile.arr = arr;
 		
@@ -374,7 +385,14 @@ public class OperationFile implements IOperationFile {
 			e.printStackTrace();
 		}
 	}
-	
+	public static void clearFile(){
+		try(PrintWriter writer = new PrintWriter(TempFile);){			
+			writer.print("");			
+		}catch(Exception ex){
+			
+		}
+		
+	}
 	public static void checkTempFile(ArrayList<Article> lst){
 		
 		String str;
@@ -447,10 +465,13 @@ public class OperationFile implements IOperationFile {
 					 lst.remove(index);				
 				}
 			}
+			writeFile(lst);
+			clearFile();
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
+	
 }

@@ -9,8 +9,8 @@ import java.util.Scanner;
 public class Filter {
 	private Scanner scan;
 	private static String sId = "D";
-	private static String sTitle = "A";
-	private static String sAuthor = "A";
+	private static String sTitle = "D";
+	private static String sAuthor = "D";
 	public Filter() {
 		scan = new Scanner(System.in);// create new object scanner to get data
 										// from user
@@ -69,12 +69,12 @@ public class Filter {
 				.print("Sort article by Ascending 'A' or Descending 'D': ");
 		String option = scan.next();
 		if (option.equalsIgnoreCase("A")) {//check
-			if(sId=="D"){
+			if(sTitle=="D"){
 				Collections.reverse(arrList);
 			}
 			return arrList;
 		} else if (option.equalsIgnoreCase("D")) {
-			if(sId=="A"){
+			if(sTitle=="A"){
 				Collections.reverse(arrList);
 			}
 		}
@@ -84,7 +84,7 @@ public class Filter {
 	}
 
 	public ArrayList<Article> sortArticleByAuthor(ArrayList<Article> arrList) {
-
+		/* sort to ascending order*/
 		Collections.sort(arrList, new Comparator<Article>() {
 
 			@Override
@@ -92,18 +92,18 @@ public class Filter {
 				// TODO Auto-generated method stub
 				return art1.getAuthor().compareTo(art2.getAuthor());
 			}
-		});
+		}); 
 
 		System.out
 				.print("Sort article by Ascending 'A' or Descending 'D': ");
-		String option = scan.next();
-		if (option.equalsIgnoreCase("A")) {//check
-			if(sId=="D"){
+		String option = scan.next();// Ask user option
+		if (option.equalsIgnoreCase("A")) {//check 
+			if(sAuthor=="D"){
 				Collections.reverse(arrList);
 			}
 			return arrList;
 		} else if (option.equalsIgnoreCase("D")) {
-			if(sId=="A"){
+			if(sAuthor=="A"){
 				Collections.reverse(arrList);
 			}
 		}

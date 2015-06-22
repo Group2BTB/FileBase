@@ -298,19 +298,17 @@ public class OperationFile implements IOperationFile {
 
 	public static void readFile(ArrayList<Article> arr){
 		//OperationFile.arr = arr;
-		
-		if(TempFile.exists()){				
-			
-			checkTempFile(arr);
-			TempFile.delete();
-			writeFile(arr);
-			return;
-		}
-		
+				
 		if(file.exists() == false){
+			if(TempFile.exists()){				
+				
+				checkTempFile(arr);
+				TempFile.delete();
+				writeFile(arr);
+				return;
+			}
 			 return;
-		}
-			
+		}			
 			
 		try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));) {
 			
@@ -318,6 +316,14 @@ public class OperationFile implements IOperationFile {
 				arr.clear();
 			}
 			arr.addAll((ArrayList<Article>)ois.readObject());
+			
+			if(TempFile.exists()){				
+				
+				checkTempFile(arr);
+				TempFile.delete();
+				writeFile(arr);
+				return;
+			}
 					
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

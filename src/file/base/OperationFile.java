@@ -74,8 +74,8 @@ public class OperationFile implements IOperationFile {
 				arrList.add(art);// add object art of Article to ArrayList
 				System.out.println("Article saved...");
 				writeLogFile("Add ", "Add ID="+art.getId()+" ", "Sucessfuly");
-				//String str = art.getContent().replaceAll("\\n","\\\\n");
-				writeTempAdd(art.getId(), art.getTitle(), art.getContent(), art.getAuthor(), art.getDate());
+				String str = art.getContent().replaceAll("\\n","\\\\n");
+				writeTempAdd(art.getId(), art.getTitle(), str, art.getAuthor(), art.getDate());
 			} else if (choice == 2) {
 				arrList.add(art);// add object art of Article to ArrayList
 				System.out.println("Article saved...");				
@@ -149,7 +149,9 @@ public class OperationFile implements IOperationFile {
 			arrList.clear();// call method clear() of ArrayList
 			TempFile.delete();
 			file.delete();
+			writeLogFile("Delete All ", "You have Delete all Articles", "Sucessfuly");
 			System.out.println("All of the article content was clear!");
+			
 			return true;			
 		} else if (option.matches("n")) {
 			System.out.println("Delete was canceled!");
@@ -402,14 +404,7 @@ public class OperationFile implements IOperationFile {
 			e.printStackTrace();
 		}
 	}
-	public static void clearFile(){
-		try(PrintWriter writer = new PrintWriter(TempFile);){			
-			writer.print("");			
-		}catch(Exception ex){
-			
-		}
-		
-	}
+	
 	public static void checkTempFile(ArrayList<Article> lst){
 		
 		String str;
@@ -439,6 +434,7 @@ public class OperationFile implements IOperationFile {
 					 start = str.lastIndexOf("@@@3")+4;
 					 stop = str.indexOf("@@@4");
 					 content = str.substring(start, stop).trim();
+					 content = content.replaceAll("\\\\n", "\n");
 					 
 					 start = str.lastIndexOf("@@@4")+4;
 					 stop = str.indexOf("@@@5");
@@ -463,6 +459,7 @@ public class OperationFile implements IOperationFile {
 					 start = str.lastIndexOf("@@@3")+4;
 					 stop = str.indexOf("@@@4");
 					 content = str.substring(start, stop).trim();
+					 content = content.replaceAll("\\\\n", "\n");
 					 
 					 start = str.lastIndexOf("@@@4")+4;
 					 stop = str.indexOf("@@@5");

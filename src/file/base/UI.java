@@ -195,7 +195,7 @@ public class UI {
 	 */
 	public void menu(){
 		System.out.println("+=================================>} MENU {<==================================+");
-		System.out.println("|                               HM)Home RE)Restore X)Exit H)Help              |");
+		System.out.println("|                        HM)Home SB)Restore Backup X)Exit H)Help              |");
 		System.out.println("|   F)First | P)Previous | N)Next | L)Last | G)Goto | R)Set Row | SO)Sort     |");
 		System.out.println("|   S)Search| RD)Read | A)Add | E)Edit | D)Delete | CA)CLEAR-All | B)Backup   |");
 		System.out.println("|_____________________________________________________________________________|");

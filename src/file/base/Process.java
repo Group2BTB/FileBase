@@ -58,6 +58,7 @@ public class Process extends OperationFile{
 				switch (part) {
 					// main page
 					case "HM":
+						
 						actSearch = 0;
 						pagin.showPage(this.arrList, 1, "HM", ui);
 						break;
@@ -140,8 +141,9 @@ public class Process extends OperationFile{
 						readArticel(arrList, Integer.parseInt(strAct[1]));
 						break;
 					// Restore Article
-					case "Re":
+					case "SB":
 						callRestore();
+						OperationFile.readFile(arrList);
 						break;
 					// Back Article
 					case "B":
@@ -215,7 +217,7 @@ public class Process extends OperationFile{
 					readArticel(arrList, Integer.parseInt(strAct[1]));
 					break;
 				// Restore Article
-				case "Re":
+				case "SB":
 					callRestore();
 					break;
 				// Back Article

@@ -19,13 +19,13 @@ public class Process extends OperationFile{
 		// TODO Auto-generated constructor stub
 		//arrList = 
 
-		//for(int i=1; i<=1000000;i++){
-		//	arrList.add(new Article(i, "title", "content", "author", "2015-01-01"));
-		//}
+		for(int i=1; i<=1000000;i++){
+			arrList.add(new Article(i, "title", "content", "author", "2015-01-01"));
+		}
 		
 		OperationFile ope =new OperationFile();
-		//ope.writeFile(arrList);
-		ope.readFile(arrList);
+		ope.writeFile(arrList);
+		//ope.readFile(arrList);
 		//ope.checkTempFile(arrList);				
 
 	}
